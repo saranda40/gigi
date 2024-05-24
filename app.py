@@ -14,4 +14,4 @@ st.image('./assets/flor.jpeg','Flores Eternas Gigi',width=200)
 st.title('Flores Eternas Gigi')
 st.text('Venta de Flores eternas individuales y por Ramos, con todo el amor del mundo')
 
-option_menu(menu_title=None,options=["Reservar","Imagenes","Detalles"],icons=["bookmark","bi-flower1","bi-ticket-detailed"])
+selected = option_menu(menu_title=None,options=["Reservar","Imágenes","Detalles"],icons=["bookmark","bi-flower1","bi-ticket-detailed"],orientation="horizontal")
