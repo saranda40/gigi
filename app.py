@@ -65,4 +65,8 @@ if selected == "Imágenes":
 if selected == "Reservar":
      st.subheader("Reservar" ,divider='rainbow')
 
+     c1, c2 = st.columns(2)
+     with c1:
+         st.image("assets/flor3.jpeg", caption ="Foto Referencial")
+
 
