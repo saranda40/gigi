@@ -95,5 +95,7 @@ if selected == "Reservar":
          elif colores == "":
              st.warning("Color del ramo es Obligatorio", icon=":material/warning:")
          else:
+             # crear evento calendar
+             #crear evento google hoja
              st.success("Su pedido ha sido registrado, pronto nos comunicaremos con Usted. Atte Gigi Team",icon=":material/check:")
 
