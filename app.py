@@ -1,6 +1,10 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+ramos = ["Una Flor", "Ramo 3 flores", "Ramo 5 flores","Ramo 10 flores", "Ramo 15 flores" ]
+colores = ["Gris","Rojo","Verde","Multicolor"]
+retiros = ["A Domicilio", "A Convenir"]
+
 page_title="Flores Eternas Gigi"
 page_icon="🎉"
 layout="centered"
@@ -66,7 +70,30 @@ if selected == "Reservar":
      st.subheader("Reservar" ,divider='rainbow')
 
      c1, c2 = st.columns(2)
-     with c1:
-         st.image("assets/flor3.jpeg", caption ="Foto Referencial")
+     
+     nombre = c1.text_input("Nombre", placeholder="Nombre")
+     email = c2.text_input("Email")
+     fecha = c1.date_input("Fecha")
+     tipo_retiro = c2.selectbox("Tipo Retiro", retiros)
+     tipo_ramo = c1.selectbox("Tipo Ramo", ramos)
+     colores = c2.selectbox("Color", colores)
+     notas = c1.text_area("Notas")
 
+     enviar = st.button("Reservar")
+     
+     if enviar:
+         if nombre =="":
+             st.warning("Nombre es Obligatorio", icon=":material/warning:")
+         elif email == "":
+             st.warning("Email es Obligatorio", icon=":material/warning:")
+         elif fecha == "":
+             st.warning("Fecha es Obligatorio", icon=":material/warning:")
+         elif tipo_retiro == "":
+             st.warning("Retiro es Obligatorio", icon=":material/warning:")
+         elif tipo_ramo == "":
+             st.warning("Tipo Ramo es Obligatorio", icon=":material/warning:")
+         elif colores == "":
+             st.warning("Color del ramo es Obligatorio", icon=":material/warning:")
+         else:
+             st.success("Su pedido ha sido registrado, pronto nos comunicaremos con Usted. Atte Gigi Team",icon=":material/check:")
 
