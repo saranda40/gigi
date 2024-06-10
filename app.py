@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+from st_social_media_links import SocialMediaIcons
 
 ramos = ["Una Flor", "Ramo 3 flores", "Ramo 5 flores","Ramo 10 flores", "Ramo 15 flores" ]
 colores = ["Gris","Rojo","Verde","Multicolor"]
@@ -51,9 +52,12 @@ if selected == "Detalles":
 
     st.subheader("Contacto :hibiscus:" ,divider='rainbow')
     st.caption(":telephone_receiver: +5691235468")
+    social_media_links = ["https://www.instagram.com/m._floreseternas/"]
+    colors = [None]
+    social_media_icons = SocialMediaIcons(social_media_links, colors)
+    social_media_icons.render(sidebar=False)
+    
 
-    st.subheader("Instagram :hibiscus:" ,divider='rainbow')
-    st.link_button("Siguenos!", "https://www.instagram.com/m._floreseternas/")
 
 if selected == "Imágenes":
     st.write("##")
@@ -67,11 +71,11 @@ if selected == "Imágenes":
         st.image("assets/flor3.jpeg", caption ="Foto Referencial")
 
 if selected == "Reservar":
-     st.subheader("Reservar" ,divider='rainbow')
+     st.subheader("Pedidos" ,divider='rainbow')
 
      c1, c2 = st.columns(2)
-     
-     nombre = c1.text_input("Nombre", placeholder="Nombre")
+
+     nombre = c1.text_input("Nombre")
      email = c2.text_input("Email")
      fecha = c1.date_input("Fecha")
      tipo_retiro = c2.selectbox("Tipo Retiro", retiros)

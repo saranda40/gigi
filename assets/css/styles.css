@@ -1,9 +1,13 @@
-body {
-    background-color: #883939;
-    font-family: Arial, sans-serif;
-}
-
-h1 {
+.st-emotion-cache-asc41u.e1nzilvr2 h3 {
     color: #d12b2b;
     text-align: center;
+}
+
+.st-emotion-cache-j6qv4b.e1nzilvr4 p {
+    background-color: beige;
+    border-color: black;
+}
+
+.st-emotion-cache-7ym5gk.ef3psqc12 .st-emotion-cache-j6qv4b.e1nzilvr4 p  {
+    background-color: blue;
 }
