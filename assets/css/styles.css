@@ -1,13 +1,39 @@
 .st-emotion-cache-asc41u.e1nzilvr2 h3 {
-    color: #d12b2b;
+    color: #000;
     text-align: center;
 }
 
-.st-emotion-cache-j6qv4b.e1nzilvr4 p {
-    background-color: beige;
-    border-color: black;
+.st-emotion-cache-asc41u.e1nzilvr2 h1 {
+    color: #eadede;
+    text-align: center;
 }
 
-.st-emotion-cache-7ym5gk.ef3psqc12 .st-emotion-cache-j6qv4b.e1nzilvr4 p  {
-    background-color: blue;
+.st-emotion-cache-1yiq2ps.ea3mdgi9{
+    background: linear-gradient(blue, pink);
 }
+
+.st-emotion-cache-1v0mbdj.e115fcil1 {
+    text-align: center;
+    padding: 10px 240px;
+}
+.st-emotion-cache-1v0mbdj.e115fcil1 img {
+    border-radius: 15px;
+    height: 100%;
+    width: 200px;
+}
+
+.st-emotion-cache-183lzff.exotz4b0 {
+    color:#eadede;
+    font-weight: 500;
+}
+
+
+.st-emotion-cache-7ym5gk.ef3psqc12{
+    color:#eadede;
+    background: linear-gradient(blue, pink);
+ }
+
+.st-emotion-cache-7ym5gk.ef3psqc12:hover{
+    color: #000;
+    border-color: #eadede;
+ }

@@ -1,6 +1,64 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 from st_social_media_links import SocialMediaIcons
+import sqlite3 
+from sqlite3 import Error
+
+# Conectar a la base de datos SQLite (o crearla si no existe)
+def create_connection(db_file):
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+        return conn
+    except Error as e:
+        st.error(e)
+    return conn
+
+# Crear tabla pedidos
+def create_table(conn):
+    try:
+        sql_create_pedidos_table = """ CREATE TABLE IF NOT EXISTS pedidos (
+                                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                            nombre TEXT NOT NULL,
+                                            email TEXT NOT NULL,
+                                            fecha DATE NOT NULL,
+                                            tipo_retiro INTEGER NOT NULL,
+                                            tipo_ramo INTEGER NOT NULL,
+                                            colores INTEGER NOT NULL,
+                                            notas TEXT
+                                        ); """
+        sql_create_colores_table = """ 
+        CREATE TABLE IF NOT EXISTS colores (
+            id_color INTEGER PRIMARY KEY AUTOINCREMENT,
+            colores TEXT NOT NULL
+        ); """
+
+        cursor = conn.cursor()
+        cursor.execute(sql_create_pedidos_table)
+        cursor.execute(sql_create_colores_table)
+    except Error as e:
+        st.error(e)
+
+# Insertar un nuevo pedido en la tabla
+def insert_pedido(conn, pedido):
+    sql = ''' INSERT INTO pedidos(nombre, email, fecha, tipo_retiro, tipo_ramo, colores, notas)
+              VALUES(?,?,?,?,?,?,?) '''
+    cur = conn.cursor()
+    cur.execute(sql, pedido)
+    conn.commit()
+    return cur.lastrowid
+
+# Ruta de la base de datos
+database = "./pedidos.db"
+
+# Crear conexión a la base de datos
+conn = create_connection(database)
+
+# Crear tabla si no existe
+if conn is not None:
+    create_table(conn)
+else:
+    st.error("Error! No se puede conectar a la base de datos.")
 
 ramos = ["Una Flor", "Ramo 3 flores", "Ramo 5 flores","Ramo 10 flores", "Ramo 15 flores" ]
 colores = ["Gris","Rojo","Verde","Multicolor"]
@@ -15,8 +73,8 @@ st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
 with open('./assets/css/styles.css') as css:
     st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
 
-st.image('./assets/flor.jpeg','Flores Eternas Gigi',width=200)
-st.title('Flores Eternas Gigi')
+st.image('./assets/flor.jpeg','Flores Eternas Gigi')
+st.title('Flores Eternas GIGI')
 st.text('Venta de Flores eternas individuales y por Ramos, con todo el amor del mundo')
 
 selected = option_menu(menu_title=None,options=["Reservar","Imágenes","Detalles"],icons=["bookmark","bi-flower1","bi-ticket-detailed"],orientation="horizontal")
@@ -99,7 +157,16 @@ if selected == "Reservar":
          elif colores == "":
              st.warning("Color del ramo es Obligatorio", icon=":material/warning:")
          else:
-             # crear evento calendar
-             #crear evento google hoja
-             st.success("Su pedido ha sido registrado, pronto nos comunicaremos con Usted. Atte Gigi Team",icon=":material/check:")
+             
+              pedido = (nombre, email, fecha, tipo_retiro, tipo_ramo, colores, notas)
+        
+                # Insertar pedido en la base de datos
+              if conn is not None:
+                    pedido_id = insert_pedido(conn, pedido)
+                    if pedido_id:
+                        st.success("Su pedido ha sido registrado, pronto nos comunicaremos con Usted. Atte Gigi Team", icon=":material/check:")
+                    else:
+                        st.error("Hubo un error al registrar su pedido. Inténtelo de nuevo.")
+              else:
+                    st.error("No se pudo conectar a la base de datos.")
 
